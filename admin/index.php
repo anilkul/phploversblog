@@ -4,7 +4,7 @@
   $db = new Database;
 
   //Create Query
-  $query = "SELECT posts.*, categories.name FROM posts INNER JOIN categories ON posts.category = categories.id";
+  $query = "SELECT posts.*, categories.name FROM posts INNER JOIN categories ON posts.category = categories.id ORDER BY posts.title DESC";
 
   //Run Query
   $posts = $db->select($query); 

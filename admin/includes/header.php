@@ -42,7 +42,7 @@
           <a class="blog-nav-item active" href="index.php">Dashboard</a>
           <a class="blog-nav-item" href="add_post.php">Add Post</a>
           <a class="blog-nav-item" href="add_category.php">Add Category</a>
-          <a class="blog-nav-item" href="http://localhost:8888/phploversblog">Visit Blog</a>
+          <a class="blog-nav-item pull-right" href="../index.php">Visit Blog</a>
         </nav>
       </div>
     </div>

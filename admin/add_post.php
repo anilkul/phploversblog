@@ -10,14 +10,14 @@
 		$category = mysqli_real_escape_string($db->link, $_POST['category']);
 		$author   = mysqli_real_escape_string($db->link, $_POST['author']);
 		$tags     = mysqli_real_escape_string($db->link, $_POST['tags']);
-
+		
 		//Simple Validation
 		if ($title == '' || $body == '' || $category == '' || $author == '') {
 			//Set Error
 			$error = 'Please fill out all required fields';	
 		} else {
-			$query = "INSERT INTO posts(title, body, category, author, tags) VALUES('$title', '$body', $category, '$author', '$tags')"; 
-			$insert_row = $db->insert($query); 
+			$query = "INSERT INTO posts(title, body, category, author, tags) VALUES('$title', '$body', $category, '$author', '$tags') "; 
+			$insert_row = $db->select($query); 
 		}
 	}
 ?>
@@ -54,7 +54,7 @@
     <input name="tags" type="text" class="form-control" placeholder="Enter Tags"></textarea>
   </div>
   <div class="form-group">
-  	<input name="Submit" type="submit" class="btn btn-success" value="Submit">
+  	<input name="submit" type="submit" class="btn btn-success" value="Submit">
   	<a href="index.php" class="btn btn-default">Cancel</a>
   </div>
 </form>

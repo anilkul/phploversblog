@@ -18,7 +18,37 @@
   $categories = $db->select($query);
 ?>
 
-<form method="post" action="add_post.php">
+
+<?php
+  if(isset($_POST['submit'])) {
+    //Assign Vars
+    $title    = mysqli_real_escape_string($db->link, $_POST['title']);
+    $body     = mysqli_real_escape_string($db->link, $_POST['body']);
+    $category = mysqli_real_escape_string($db->link, $_POST['category']);
+    $author   = mysqli_real_escape_string($db->link, $_POST['author']);
+    $tags     = mysqli_real_escape_string($db->link, $_POST['tags']);
+    
+    //Simple Validation
+    if ($title == '' || $body == '' || $category == '' || $author == '') {
+      //Set Error
+      $error = 'Please fill out all required fields'; 
+    } else {
+      //Update Query
+      $query = "UPDATE posts SET title='$title', body='$body', category='$category', author='$author', tags='$tags' WHERE id = $id"; 
+      $update_row = $db->update($query); 
+    }
+  }
+?>
+
+<?php
+  if(isset($_POST['delete'])) {
+    //Delete Query
+    $query = "DELETE FROM posts WHERE id = $id";
+    $delete_row = $db->delete($query);
+  }
+?>
+
+<form method="post" action="edit_post.php?id=<?php echo $id ?>">
   <div class="form-group">
     <label>Post Title</label>
     <input name="title" type="text" class="form-control" placeholder="Enter Title" value="<?php echo $post['title'] ?>">
@@ -29,7 +59,7 @@
   </div>
   <div class="form-group">
     <label>Category</label>
-    <select name="title" type="text" class="form-control">
+    <select name="category" type="text" class="form-control">
     <?php while($row = $categories->fetch_assoc()): ?>
       <?php if ($row['id'] == $post['category']) {
         $selected = 'selected' ;
@@ -37,7 +67,7 @@
         $selected = '';
       }
       ?>
-        <option <?php echo $selected ?>><?php echo $row['name'] ?></option>
+        <option value="<?php echo $row['id'] ?>"><?php echo $row['name'] ?></option>
     <?php endwhile ?>
     </select>
   </div>
@@ -50,8 +80,8 @@
     <input name="tags" type="text" class="form-control" placeholder="Enter Tags" value="<?php echo $post['tags'] ?>">
   </div>
   <div class="form-group">
-  	<input name="Submit" type="submit" class="btn btn-success" value="Submit">
-    <input name="Submit" type="submit" class="btn btn-danger" value="Delete"> 
+  	<input name="submit" type="submit" class="btn btn-success" value="Submit">
+    <input name="delete" type="submit" class="btn btn-danger" value="Delete"> 
   	<a href="index.php" class="btn btn-default">Cancel</a>
   </div>
 </form>

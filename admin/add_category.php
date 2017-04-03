@@ -17,6 +17,7 @@
     }
   }
 ?>
+
 <form method="post" action="add_category.php">
   <div class="form-group">
     <label>Category Name</label>
@@ -24,9 +25,8 @@
   </div>
 
   <div class="form-group">
-    <input name="Submit" type="submit" class="btn btn-success" value="Submit">
+    <input name="submit" type="submit" class="btn btn-success" value="Submit">
   	<a href="index.php" class="btn btn-default">Cancel</a>
   </div>
 </form>
-
 <?php include 'includes/footer.php' ?>

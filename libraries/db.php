@@ -1,5 +1,5 @@
 <?php
-class Database {
+class Database{
 /**
 * 
 * Must include a file that has connection declarations made by snippet: "cdec".
@@ -16,7 +16,7 @@ public $error;
 /*
  * Connect Class Constructor
  */
-public function __construct($host, $username, $password, $db_name) {
+public function __construct() {
 	//Call Connect Function
 	$this->connect();
 }
@@ -46,15 +46,15 @@ public function select($query) {
 /*
  * Insert
  */	
-public function insert($query) {
-	$insert_row = $this->link>query($query) or die($this->link->error.__LINE__);
+public function insert($query){
+	$insert_row = $this->link->query($query) or die($this->link->error.__LINE__);
 
 	//Validate Insert
-	if($insert_row) {
+	if ($insert_row) {
 		header("Location: index.php?msg=".urlencode('Record Added'));
 		exit();
 	} else {
-		die('Error: ('. $this->link>errno .') '. $this->link->error);
+		die('Error: (' . $this->link->errno .') '.$this->link->error);
 	}
 }
 
@@ -62,14 +62,14 @@ public function insert($query) {
  * Update
  */	
 	public function update($query) {
-	$update_row = $this->link>query($query) or die($this->link->error.__LINE__);
+	$update_row = $this->link->query($query) or die($this->link->error.__LINE__);
 
-	//Validate Insert
+	//Validate Update
 	if($update_row) {
-	header("Location: index.php?msg=".urlencode('Record Updated'));
-	exit();
+		header("Location: index.php?msg=".urlencode('Record Updated'));
+		exit();
 	} else {
-		die('Error: ('. $this->link>errno .') '. $this->link->error);
+		die('Error: ('. $this->lin->errno .') '. $this->link->error);
 	}		
 }
 
@@ -77,14 +77,14 @@ public function insert($query) {
  * Delete
  */	
 	public function delete($query) {
-	$delete_row = $this->link>query($query) or die($this->link->error.__LINE__);
+	$delete_row = $this->link->query($query) or die($this->link->error.__LINE__);
 
-	//Validate Insert
+	//Validate Delete
 	if($delete_row) {
-	header("Location: index.php?msg=".urlencode('Record Deleted'));
-	exit();
+		header("Location: index.php?msg=".urlencode('Record Deleted'));
+		exit();
 	} else {
-		die('Error: ('. $this->link>errno .') '. $this->link->error);
+		die('Error: ('. $this->link->errno .') '. $this->link->error);
 	}
 }
 }
